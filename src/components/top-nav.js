@@ -1,14 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import store from './store';
+import { removeAll, toggleInfo } from '../actions';
+
 
 import './top-nav.css';
 
-export default class TopNav extends React.Component {
-    onNewGame(event) {
-        event.preventDefault();
-        if (this.props.onNewGame) {
-            this.props.onNewGame();
-        }
-    }
+export  class TopNav extends React.Component {
+    
 
     onInfo(event) {
         event.preventDefault();
@@ -22,12 +21,12 @@ export default class TopNav extends React.Component {
             <nav>
                 <ul className="clearfix">
                     <li>
-                        <a className="what" href="#" onClick={e => this.onInfo(e)}>
+                        <a className="what" href="#" onClick={e => this.props.dispatch(toggleInfo())}>
                             What?
                         </a>
                     </li>
                     <li>
-                        <a className="new" href="#" onClick={e => this.onNewGame(e)}>
+                        <a className="new" href="#" onClick={e => this.props.dispatch(removeAll())}>
                             + New Game
                         </a>
                     </li>
@@ -36,4 +35,10 @@ export default class TopNav extends React.Component {
         );
     }
 };
+
+export const mapStateToProps = (props, state) => ({
+    
+})
+
+export default connect(mapStateToProps)(TopNav);
 

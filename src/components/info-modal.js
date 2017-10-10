@@ -1,14 +1,10 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
+import {toggleInfo} from '../actions'
 import './info-modal.css';
 
-export default class InfoModal extends React.Component {
-    onClose(event) {
-        event.preventDefault();
-        if (this.props.onClose) {
-            this.props.onClose();
-        }
-    }
+export  class InfoModal extends React.Component {
+    
 
     render() {
         return (
@@ -23,10 +19,15 @@ export default class InfoModal extends React.Component {
                             <li>3. You will <strong>get feedback</strong> on how close ("hot") or far ("cold") your guess is.</li>
                         </ul>
                         <p>So, Are you ready?</p>
-                        <a className="close" href="#" onClick={e => this.onClose(e)}>Got It!</a>
+                        <a className="close" href="#" onClick={e => this.props.dispatch(toggleInfo())}>Got It!</a>
                     </div>
                 </div>
             </div>
         );
     }
 }
+
+export const mapStateToProps = state => ({
+
+})
+export default connect(mapStateToProps)(InfoModal);
